@@ -1,11 +1,11 @@
 package org.example;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class School {
 
-    private List<Student> students;
+    private final List<Student> students;
 
     public School() {
         students = new ArrayList<>();
@@ -18,20 +18,30 @@ public class School {
     public void printAllStudents() {
         System.out.println("List of Students in the School:");
         for (Student student : students) {
-            System.out.println("Name: " + student.getFirstName() + " " +
-                    student.getLastName() + ", Student ID: " + student.getStudentID());
+            System.out.println("Name: " + student.firstName + " " +
+                    student.lastName + ", Student ID: " + student.StudentID);
         }
-
     }
 
     public void findStudentByID(int studentID) {
-        int number = 1;
         for (Student student : students) {
-            if (student.getStudentID() == number) {
-                System.out.println("test");
+            if (student.StudentID == studentID) {
+                System.out.println("Gefundener Student: " + student.firstName + " " + student.lastName);
+                return;
             }
         }
+        System.out.println("Student mit der ID " + studentID + " wurde nicht gefunden.");
     }
 
+    public void removeStudent(int studentID) {
+        for (Student student : students) {
+            if (student.StudentID == studentID) {
+                students.remove(student);
+                return;
+            }
+        }
+        System.out.println("Student mit der ID " + studentID + " wurde nicht gefunden.");
+    }
 
-}
+    }
+
