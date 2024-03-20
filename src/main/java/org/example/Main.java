@@ -1,23 +1,21 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("Hans", "Sarpei", 0));
-        students.add(new Student("Franz", "Goooo", 1));
-        students.add(new Student("Reiner", "Stan", 2));
+        Map<Student,String> students = new HashMap<>();
+        students.put(new Student("Hans", "Sarpei", 0), "Grade A");
+        students.put(new Student("Franz", "Goooo", 1), "Grade B");
+        students.put(new Student("Reiner", "Stan", 2), "Grade C");
 
-        School school = new School();
-        school.addStudent(new Student("James", "Klong", 0));
-        school.addStudent(new Student("Jamess", "Klong", 1));
-        school.addStudent(new Student("Jamesss", "Klong", 2));
+        School school = new School(students);
+        school.addStudent(new Student("James", "Klong", 3), "Grade D");
+        school.addStudent(new Student("Jamess", "Klong", 4), "Grade F");
 
-        //school.printAllStudents();
+        school.printAllStudents();
 
         // Call findStudentByID method
 
@@ -26,8 +24,5 @@ public class Main {
         school.findStudentByID(1);
         school.findStudentByID(2);
         school.findStudentByID(3);
-
-
-
     }
 }

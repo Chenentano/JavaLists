@@ -1,47 +1,42 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class School {
+    private Map<Student, String> students;
 
-    private final List<Student> students;
-
-    public School() {
-        students = new ArrayList<>();
+    public School(Map<Student, String> students) {
+        this.students = students;
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
+    public void addStudent(Student student, String grade) {
+        students.put(student, grade);
+    }
+
+    public void removeStudent(int id) {
+        for (Map.Entry<Student, String> entry : students.entrySet()) {
+            if (entry.getKey().StudentID == id) {
+                students.remove(entry.getKey());
+                return;
+            }
+        }
+        System.out.println("Student with ID " + id + " not found.");
+    }
+
+    public void findStudentByID(int id) {
+        for (Map.Entry<Student, String> entry : students.entrySet()) {
+            if (entry.getKey().StudentID == id) {
+                System.out.println("Student found: " + entry.getKey().firstName + " " + entry.getKey().lastName + ", Grade: " + entry.getValue());
+                return;
+            }
+        }
+        System.out.println("Student with ID " + id + " not found.");
     }
 
     public void printAllStudents() {
-        System.out.println("List of Students in the School:");
-        for (Student student : students) {
-            System.out.println("Name: " + student.firstName + " " +
-                    student.lastName + ", Student ID: " + student.StudentID);
+        for (Map.Entry<Student, String> entry : students.entrySet()) {
+            System.out.println(entry.getKey().firstName + " " + entry.getKey().lastName + ", Grade: " + entry.getValue());
         }
     }
-
-    public void findStudentByID(int studentID) {
-        for (Student student : students) {
-            if (student.StudentID == studentID) {
-                System.out.println("Gefundener Student: " + student.firstName + " " + student.lastName);
-                return;
-            }
-        }
-        System.out.println("Student mit der ID " + studentID + " wurde nicht gefunden.");
-    }
-
-    public void removeStudent(int studentID) {
-        for (Student student : students) {
-            if (student.StudentID == studentID) {
-                students.remove(student);
-                return;
-            }
-        }
-        System.out.println("Student mit der ID " + studentID + " wurde nicht gefunden.");
-    }
-
-    }
-
+}
